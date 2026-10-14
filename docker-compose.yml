@@ -1,10 +1,14 @@
 services:
-  web:
+  api:
     build: .
+    container_name: churn-risk-console-api
     ports:
       - "8000:8000"
     environment:
-      LLM_MODE: mock
       APP_NAME: churn-risk-console
+      LLM_MODE: mock
+      DATABASE_URL: sqlite+aiosqlite:///./data/app.db
+      LOG_LEVEL: INFO
     volumes:
       - ./data:/app/data
+    restart: unless-stopped
